@@ -25,7 +25,7 @@ public class Pokedex{
 		System.out.println("======= ========\n");
 		for(int i=0;i<SetupPokemon.cantidadPokemones;i++){
 			if(pokemones[i].getCapturado()){
-				System.out.println("Id: "+pokemones[i].getId()+"- Nombre: "+pokemones[i].getNombre());
+				System.out.println("Id: "+pokemones[i].getId()+"- Nombre: "+pokemones[i].getNombre()+" Nvl "+pokemones[i].getNvl());
 				for(int j=0;j<3;j++){
 					System.out.println("Ataque "+pokemones[i].getAtaques()[j].getNombre()+" ");
 					System.out.println("*** Daño:"+pokemones[i].getAtaques()[j].getDano());

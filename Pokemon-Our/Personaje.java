@@ -20,7 +20,7 @@ public class Personaje{
 		System.out.println("\n\n********************************************************\n\n");
 		System.out.println("Elije tu pokemon inicial....");
 		System.out.println("\n\n********************************************************\n\n");
-		int n=SetupPokemon.cantidadPokemones;
+		int n= 3;
 		
 		for(int i=0;i<n;i++)
 			System.out.println((i+1)+".- "+pokedexGral.getPokemon(i).getNombre());
