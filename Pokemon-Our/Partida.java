@@ -85,6 +85,32 @@ public class Partida{
 		}
 
 	}
+	//Arreglar problema que aparece despues de una batalla
+	private void Explorar(){
+		Random num = new Random();
+		int b=num.nextInt(3);
+		if (b==0){
+			System.out.println("Te haz encontrado con un Pokémon salvaje, preparate para el combate");
+			crearCombate();
+		}
+		if (b==1){
+			System.out.println("Enhorabuena, haz encontrado una baya");
+		}
+		else{
+			System.out.println("No se ha encontrado nada por aqui, ¿que quieres hacer ahora?: ");
+		}
+	}
+	private void mochila() throws NumberFormatException, IOException {
+		int op=0;
+		System.out.println("Selecciona la acción que quieres realizar: ");
+		System.out.println("1.- Objetos. ");
+		System.out.println("2.- Medallas. ");
+		System.out.println("3.- Salir \n");
+		op = Integer.parseInt(buffer.readLine());
+		switch(op){
+			case 1: System.out.println("DCH");
+		}
+	}
 	private void crearCombate(){
 		this.W=0;
 		int n=SetupPokemon.cantidadPokemones;
