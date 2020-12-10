@@ -49,11 +49,16 @@ public class Partida{
 			
 			System.out.println("\n\n********************************************************\n\n");
 			System.out.println("Selecciona la acción que quieres realizar: ");
-			System.out.println("1.- Exoplorar. ");
+			System.out.println("1.- Explorar. ");
 			System.out.println("2.- Ver Pokedex. ");
 			System.out.println("3.- Mapa. ");
 			System.out.println("4.- Terminar Juego. ");
-			op = Integer.parseInt(buffer.readLine());
+			try{
+				op = Integer.parseInt(buffer.readLine());
+			}catch(NumberFormatException e){
+					System.out.println("\n   Error de lectura desde el teclado... \n");
+				op=0;
+			}
 			System.out.println("\n\n********************************************************\n\n");
 			switch(op){
 				case 1: System.out.println("\n\n********************************************************\n\n");
@@ -164,7 +169,12 @@ public class Partida{
 			System.out.println("2.- Ciudades Cercanas. ");
 			System.out.println("3.- Viajar ");
 			System.out.println("4.- Salir del mapa. ");
-			caso = Integer.parseInt(buffer.readLine());
+			try{
+				caso = Integer.parseInt(buffer.readLine());
+			}catch(NumberFormatException e){
+				System.out.println("\n   Error de lectura desde el teclado... \n");
+		 	}	
+
 			System.out.println("\n\n********************************************************\n\n");
 			switch(caso){
 				case 1: System.out.println("*********** CIUDAD ACTUAL ***********");
@@ -185,30 +195,35 @@ public class Partida{
 				case 3:	System.out.println("*********** VIAJAR A ***********");
 						if (this.Posicion==0 || this.Posicion==4){
 							System.out.println("1.-"+mapa.getViajar()[this.Posicion][0]);
-							caso = Integer.parseInt(buffer.readLine());
-							if(this.Posicion ==0 && caso == 1){
-								this.mapa.setPosicion(Posicion+1);
-								this.Posicion=mapa.getPosicion();
+							try{
+								caso = Integer.parseInt(buffer.readLine());
+								if(this.Posicion ==0 && caso == 1){
+									this.mapa.setPosicion(Posicion+1);
+									this.Posicion=mapa.getPosicion();
+									
+									encuentros();
+									System.out.println(" *********** Llegamos a "+this.mapa.getLugar(this.Posicion)+" ***********");
+									System.out.println("\n\n********************************************************\n\n");
+									break;
+								}
+								else if(Posicion == 4 && caso==1){
+									System.out.println("1.-"+mapa.getViajar()[this.Posicion][0]);
+									this.mapa.setPosicion(Posicion-1);
+									this.Posicion=mapa.getPosicion();
+									encuentros();
+									System.out.println(" *********** Llegamos a "+this.mapa.getLugar(this.Posicion)+" ***********");
+									System.out.println("\n\n********************************************************\n\n");
+									break;
+								}
 								
-								encuentros();
-								System.out.println(" *********** Llegamos a "+this.mapa.getLugar(this.Posicion)+" ***********");
-								System.out.println("\n\n********************************************************\n\n");
+								else{
+									System.out.println("\n\n********************************************************\n\n");
+									break;
+								}
+							}catch(NumberFormatException e){
+								System.out.println("\n   Error de lectura desde el teclado... \n");
 								break;
-							}
-							else if(Posicion == 4 && caso==1){
-								System.out.println("1.-"+mapa.getViajar()[this.Posicion][0]);
-								this.mapa.setPosicion(Posicion-1);
-								this.Posicion=mapa.getPosicion();
-								encuentros();
-								System.out.println(" *********** Llegamos a "+this.mapa.getLugar(this.Posicion)+" ***********");
-								System.out.println("\n\n********************************************************\n\n");
-								break;
-							}
-							
-							else{
-								System.out.println("\n\n********************************************************\n\n");
-								break;
-							}
+						}
 						}
 						else if(this.Posicion>=1 && this.Posicion<=4){
 							System.out.println("1.-"+mapa.getViajar()[this.Posicion][0]);

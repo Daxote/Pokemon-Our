@@ -27,16 +27,23 @@ public class Personaje{
 		
 		int op=-1;
 		boolean flag=false;
-		do{
-			if(flag) System.out.println("Ingrese una opción válida...");
-			System.out.println("Elije tu pokemon inicial....");
-			try{
-				op = Integer.parseInt(buffer.readLine());
+		try{
+			do{
+				if(flag) System.out.println("Ingrese una opción válida...");
+				System.out.println("Elije tu pokemon inicial....");
+				try{
+					op = Integer.parseInt(buffer.readLine());
+					
+				}catch(NumberFormatException e){
+					System.out.println("\n Error de lectura desde el teclado... \n");
+					for(int i=0;i<n;i++)
+						System.out.println((i+1)+".- "+pokedexGral.getPokemon(i).getNombre());
+				}
 				flag=true;
-			}catch(IOException e){
-				System.out.println("Error de lectura desde el teclado...");
-			}
-		}while((op<0)||(op>n));
+			}while((op<0)||(op>n));
+		}catch(IOException e){
+			System.out.println("Error de lectura desde el teclado...");
+		}
 		pokedexPersonal.capturarPokemon(op-1);
 		System.out.println("\n\n********************************************************\n\n");
 		System.out.println("Su pokemon inicial es "+ pokedexPersonal.getPokemon(op-1).getNombre()+", felicitaciones!!!");
