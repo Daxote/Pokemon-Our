@@ -29,18 +29,28 @@ public class Combate{
 	}
 
 	public void ataque(Pokemon player1,Pokemon player2){
-		int op;
+		int op=4;
 		try{
-			System.out.println(player1.getNombre()+", El ataque será: ");
-			System.out.println("1.-"+player1.getAtaques()[0].getNombre());
-			System.out.println("2.-"+player1.getAtaques()[1].getNombre());
-			System.out.println("3.-"+player1.getAtaques()[2].getNombre());
-			op = Integer.parseInt(buffer.readLine());
+			while(op>3){
+				System.out.println(player1.getNombre()+", El ataque será: ");
+				System.out.println("1.-"+player1.getAtaques()[0].getNombre());
+				System.out.println("2.-"+player1.getAtaques()[1].getNombre());
+				System.out.println("3.-"+player1.getAtaques()[2].getNombre());
+				try{
+					op = Integer.parseInt(buffer.readLine());
+				}catch(NumberFormatException e){
+				}
 
-			player2.recibirAtaque(player1.getAtaques()[op-1]);
-			System.out.println("\n\n********************************************************\n");
-			System.out.println("El nivel de Puntos de Salud de "+player2.getNombre()+" es "+player2.getPs());
-			System.out.println("\n********************************************************\n\n");
+				if (op<=3){
+
+					player2.recibirAtaque(player1.getAtaques()[op-1]);
+					System.out.println("\n\n********************************************************\n");
+					System.out.println("El nivel de Puntos de Salud de "+player2.getNombre()+" es "+player2.getPs());
+					System.out.println("\n********************************************************\n\n");
+				}else{
+					System.out.println("             Opcion invalida           ");
+				}
+			}
 		}catch(IOException e){
 			System.out.println("Error de lectura desde el teclado...");
 		}

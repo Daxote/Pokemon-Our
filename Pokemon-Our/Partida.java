@@ -56,7 +56,7 @@ public class Partida{
 			try{
 				op = Integer.parseInt(buffer.readLine());
 			}catch(NumberFormatException e){
-					System.out.println("\n   Error de lectura desde el teclado... \n");
+					System.out.println("\n         Error de lectura desde el teclado...          \n");
 				op=0;
 			}
 			System.out.println("\n\n********************************************************\n\n");
@@ -132,16 +132,26 @@ public class Partida{
 		
 		int op=-1;
 		boolean flag=false;
-		do{
-			if(flag) System.out.println("Ingrese una opción válida...");
-			System.out.println("Elije tu pokemon para la batalla....");
-			try{
-				op = Integer.parseInt(buffer.readLine());
+		try{
+			do{
+				if(flag) System.out.println("Ingrese una opción válida...\n");
+				System.out.println("Elije tu pokemon para la batalla....\n");
+				try{
+					op = Integer.parseInt(buffer.readLine());
+				}catch(NumberFormatException e){
+					System.out.println("\nPokedex Personal");
+					System.out.println("======= ========");
+					for(int i=0;i<n;i++){
+						aux = jugador.getPokedex().getPokemon(i);
+						if(aux.getCapturado())
+							System.out.println("\n"+(i+1)+".- "+aux.getNombre());
+					}
+				}
 				flag=true;
-			}catch(IOException e){
-				System.out.println("Error de lectura desde el teclado...");
-			}
-		}while((op<0)||(op>n));
+			}while((op<0)||(op>n));
+		}catch(IOException e){
+			System.out.println("Error de lectura desde el teclado...\n");
+		}
 		System.out.println("\n\n********************************************************\n\n");
 		System.out.println("Su pokemon para el combate es "+ jugador.getPokedex().getPokemon(op-1).getNombre());
 		System.out.println("\n\n********************************************************\n\n");
@@ -149,7 +159,7 @@ public class Partida{
 		int rival = combates[combateActual].combatir();
 		if (rival > -1){
 			jugador.getPokedex().capturarPokemon(rival);
-			System.out.println("Haz capturado un nuevo pokemon!!!");
+			System.out.println("     Haz capturado un nuevo pokemon!!!    \n");
 			this.W=1;
 		}
 		combateActual+=1;
@@ -202,7 +212,7 @@ public class Partida{
 									this.Posicion=mapa.getPosicion();
 									
 									encuentros();
-									System.out.println(" *********** Llegamos a "+this.mapa.getLugar(this.Posicion)+" ***********");
+									System.out.println(" *********** Llegamos a "+this.mapa.getLugar(this.Posicion)+" ***********\n");
 									System.out.println("\n\n********************************************************\n\n");
 									break;
 								}
@@ -211,17 +221,18 @@ public class Partida{
 									this.mapa.setPosicion(Posicion-1);
 									this.Posicion=mapa.getPosicion();
 									encuentros();
-									System.out.println(" *********** Llegamos a "+this.mapa.getLugar(this.Posicion)+" ***********");
+									System.out.println(" *********** Llegamos a "+this.mapa.getLugar(this.Posicion)+" ***********\n");
 									System.out.println("\n\n********************************************************\n\n");
 									break;
 								}
 								
 								else{
 									System.out.println("\n\n********************************************************\n\n");
+									caso=0;
 									break;
 								}
 							}catch(NumberFormatException e){
-								System.out.println("\n   Error de lectura desde el teclado... \n");
+								System.out.println("\n           Error de lectura desde el teclado...          \n");
 								break;
 						}
 						}
@@ -233,7 +244,7 @@ public class Partida{
 								this.mapa.setPosicion(Posicion-1);
 								this.Posicion=mapa.getPosicion();
 								encuentros();
-								System.out.println(" *********** Llegamos a "+this.mapa.getLugar(this.Posicion)+" ***********");
+								System.out.println(" *********** Llegamos a "+this.mapa.getLugar(this.Posicion)+" ***********\n");
 								System.out.println("\n\n********************************************************\n\n");
 								break;
 							}
@@ -259,21 +270,21 @@ public class Partida{
 
 				}while(caso!=4);
 			}catch(IOException e){
-				System.out.println("Error de lectura desde el teclado...");
+				System.out.println("          Error de lectura desde el teclado...           ");
 		}
 	}
 	public void encuentros(){
 		for(int i=1;i<=3;i++){
 			System.out.println("\n *********** Viajando a "+this.mapa.getLugar(this.Posicion)+" ***********\n");
-			System.out.println("\nCombate "+i+"/3\n");
+			System.out.println("\n                Combate "+i+"/3              \n");
 			if(i==1){
-				System.out.println("\nFalta Bastante para llegar\n");
+				System.out.println("\n          Falta Bastante para llegar        \n");
 			}
 			else if(i==2){
-				System.out.println("\nA medio camino\n");
+				System.out.println("\n               A medio camino               \n");
 			}
 			else{
-				System.out.println("\nYa casi llegamos\n");
+				System.out.println("\n             Ya casi llegamos               \n");
 			}
 			crearCombate();
 			if(this.W==0){
