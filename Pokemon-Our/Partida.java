@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Random;
 public class Partida{
 	private BufferedReader buffer;
 	private Personaje jugador;
@@ -48,7 +49,7 @@ public class Partida{
 			
 			System.out.println("\n\n********************************************************\n\n");
 			System.out.println("Selecciona la acción que quieres realizar: ");
-			System.out.println("1.- Combate. ");
+			System.out.println("1.- Exoplorar. ");
 			System.out.println("2.- Ver Pokedex. ");
 			System.out.println("3.- Mapa. ");
 			System.out.println("4.- Terminar Juego. ");
@@ -56,7 +57,7 @@ public class Partida{
 			System.out.println("\n\n********************************************************\n\n");
 			switch(op){
 				case 1: System.out.println("\n\n********************************************************\n\n");
-						crearCombate();
+						Explorar();
 						System.out.println("\n\n********************************************************\n\n");
 						break;
 				case 2: System.out.println("\n\n********************************************************\n\n");
