@@ -52,7 +52,8 @@ public class Partida{
 			System.out.println("1.- Explorar. ");
 			System.out.println("2.- Ver Pokedex. ");
 			System.out.println("3.- Mapa. ");
-			System.out.println("4.- Terminar Juego. ");
+			System.out.println("4.- Entrar al Gymnacio. ");
+			System.out.println("5.- Terminar Juego. ");
 			try{
 				op = Integer.parseInt(buffer.readLine());
 			}catch(NumberFormatException e){
@@ -78,12 +79,17 @@ public class Partida{
 						break;
 
 				case 4: System.out.println("\n\n********************************************************\n\n");
+						entrar_gimnacio();
+						System.out.println("\n\n********************************************************\n\n\n\n\n\n\n\n\n\n");
+						break;
+				
+				case 5: System.out.println("\n\n********************************************************\n\n");
 						System.out.println("El juego ha terminado,  gracias por jugar PokemonFLP!!!");
 						System.out.println("\n\n********************************************************\n\n\n\n\n\n\n\n\n\n");
 						break;
 			}
 
-			}while(op!=4);
+			}while(op!=5);
 			//System.out.println("1.- Combate. ");
 
 		}catch(IOException e){
@@ -116,6 +122,9 @@ public class Partida{
 		switch(op){
 			case 1: System.out.println("DCH");
 		}
+	}
+	private void entrar_gimnacio(){
+		mapa.getGimnacio();
 	}
 	private void crearCombate(){
 		this.W=0;
