@@ -10,6 +10,7 @@ public class Partida{
 	private Pokedex pokedexGral;
 	private Mapa mapa;
 	private String lugar;
+	private Mochila mochila;
 
 
 	Partida(Pokedex pokedexGral){
@@ -19,6 +20,10 @@ public class Partida{
 		this.pokedexGral = pokedexGral;
 		this.mapa=new Mapa();
 		crearUsuario(pokedexGral);
+		this.mochila = new Mochila();
+		System.out.println("\n\n********************************************************\n\n");
+		System.out.println("Comienza el juego...");
+		System.out.println("\n\n********************************************************\n\n");
 		menu();
 	}
 	
@@ -41,9 +46,7 @@ public class Partida{
 	}
 	public void menu(){
 		int op=0;
-		System.out.println("\n\n********************************************************\n\n");
-		System.out.println("Comienza el juego...");
-		System.out.println("\n\n********************************************************\n\n");
+		
 		try{
 			do{
 			
@@ -52,8 +55,9 @@ public class Partida{
 			System.out.println("1.- Explorar. ");
 			System.out.println("2.- Ver Pokedex. ");
 			System.out.println("3.- Mapa. ");
-			System.out.println("4.- Entrar al Gymnacio. ");
-			System.out.println("5.- Terminar Juego. ");
+			System.out.println("4.- Mochila. ");
+			System.out.println("5.- Gym");
+			System.out.println("6.- Terminar Juego. ");
 			try{
 				op = Integer.parseInt(buffer.readLine());
 			}catch(NumberFormatException e){
@@ -74,22 +78,20 @@ public class Partida{
 				case 3:	System.out.println("\n\n********************************************************\n\n");
 						this.Posicion=mapa.getPosicion();
 						opcionesViajar();
-						buffer.readLine();
 						System.out.println("\n\n********************************************************\n\n");
 						break;
-
-				case 4: System.out.println("\n\n********************************************************\n\n");
-						entrar_gimnacio();
+				case 4: mochila();
+						break;
+				case 5: entrar_gimnacio();
 						System.out.println("\n\n********************************************************\n\n\n\n\n\n\n\n\n\n");
 						break;
-				
-				case 5: System.out.println("\n\n********************************************************\n\n");
+				case 6: System.out.println("\n\n********************************************************\n\n");
 						System.out.println("El juego ha terminado,  gracias por jugar PokemonFLP!!!");
 						System.out.println("\n\n********************************************************\n\n\n\n\n\n\n\n\n\n");
 						break;
 			}
 
-			}while(op!=5);
+			}while(op!=6);
 			//System.out.println("1.- Combate. ");
 
 		}catch(IOException e){
@@ -107,24 +109,40 @@ public class Partida{
 		}
 		if (b==1){
 			System.out.println("Enhorabuena, haz encontrado una baya");
+			mochila.setBayas(mochila.getBayas()+1);
 		}
 		else{
 			System.out.println("No se ha encontrado nada por aqui, ¿que quieres hacer ahora?: ");
 		}
 	}
-	private void mochila() throws NumberFormatException, IOException {
+	private void mochila(){
 		int op=0;
-		System.out.println("Selecciona la acción que quieres realizar: ");
-		System.out.println("1.- Objetos. ");
-		System.out.println("2.- Medallas. ");
-		System.out.println("3.- Salir \n");
-		op = Integer.parseInt(buffer.readLine());
-		switch(op){
-			case 1: System.out.println("DCH");
+		
+		try{
+			do{
+				System.out.println("Selecciona la acción que quieres realizar: \n");
+				System.out.println("1.- Objetos. ");
+				System.out.println("2.- Medallas. ");
+				System.out.println("3.- Salir ");
+				try{
+					op = Integer.parseInt(buffer.readLine());
+				}catch(NumberFormatException e){
+					System.out.println("Error de lectura desde el teclado...");
+					op=0;
+					break;
+				}
+				switch(op){
+					case 1: System.out.println("Tiene "+mochila.getBayas()+" Bayas y "+mochila.getPosiones()+" Pociones \n");
+							break;
+					case 2: System.out.println("Tiene "+mochila.getMedallas()+" Medallas\n");
+							break;
+					case 3: System.out.println("Ha salido de la mochila\n");
+							menu();
+				}
+			}while(op != 3);
+		}catch(IOException e){
+			System.out.println("Error de lectura desde el teclado...");
 		}
-	}
-	private void entrar_gimnacio(){
-		mapa.getGimnacio();
 	}
 	private void crearCombate(){
 		this.W=0;
@@ -152,8 +170,9 @@ public class Partida{
 					System.out.println("======= ========");
 					for(int i=0;i<n;i++){
 						aux = jugador.getPokedex().getPokemon(i);
-						if(aux.getCapturado())
+						if(aux.getCapturado()){
 							System.out.println("\n"+(i+1)+".- "+aux.getNombre());
+						}
 					}
 				}
 				flag=true;
@@ -162,16 +181,21 @@ public class Partida{
 			System.out.println("Error de lectura desde el teclado...\n");
 		}
 		System.out.println("\n\n********************************************************\n\n");
-		System.out.println("Su pokemon para el combate es "+ jugador.getPokedex().getPokemon(op-1).getNombre());
-		System.out.println("\n\n********************************************************\n\n");
-		combates[combateActual] = new Combate(jugador.getPokedex().getPokemon(op-1), pokedexGral);
-		int rival = combates[combateActual].combatir();
-		if (rival > -1){
-			jugador.getPokedex().capturarPokemon(rival);
-			System.out.println("     Haz capturado un nuevo pokemon!!!    \n");
-			this.W=1;
+		if(jugador.getPokedex().getPokemon(op-1).getCapturado()){
+			System.out.println("Su pokemon para el combate es "+ jugador.getPokedex().getPokemon(op-1).getNombre());
+			System.out.println("\n\n********************************************************\n\n");
+			combates[combateActual] = new Combate(jugador.getPokedex().getPokemon(op-1), pokedexGral);
+			int rival = combates[combateActual].combatir();
+			if (rival > -1){
+				jugador.getPokedex().capturarPokemon(rival);
+				System.out.println("     Haz capturado un nuevo pokemon!!!    \n");
+				this.W=1;
+			}
+			combateActual+=1;
+		}else{
+			System.out.println("\n               Opcion Invalida                 \n");
 		}
-		combateActual+=1;
+		
 	}
 
 	public void mostrarPokedex(){
@@ -243,7 +267,7 @@ public class Partida{
 							}catch(NumberFormatException e){
 								System.out.println("\n           Error de lectura desde el teclado...          \n");
 								break;
-						}
+							}
 						}
 						else if(this.Posicion>=1 && this.Posicion<=4){
 							System.out.println("1.-"+mapa.getViajar()[this.Posicion][0]);
@@ -303,5 +327,7 @@ public class Partida{
 	}
 	
 	}
+	private void entrar_gimnacio(){
+		mapa.getGimnacio();
+	}
 }
-

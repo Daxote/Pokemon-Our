@@ -1,12 +1,17 @@
 public class Mochila {
     private int Bayas;
-    private int Posiones;
+    private int Pociones;
     private int Medallas;
+    Mochila(){
+        this.Bayas=0;
+        this.Pociones=0;
+        this.Medallas=0;
+    }
     public int getBayas(){
         return this.Bayas;
     }
     public int getPosiones(){
-        return this.Posiones;
+        return this.Pociones;
     }
     public int getMedallas(){
         return this.Medallas;
@@ -15,7 +20,7 @@ public class Mochila {
         this.Bayas =Bayas;
     }
     public void setPosiones(){
-        this.Posiones =Posiones;
+        this.Pociones =Pociones;
     }
     public void setMedallas() {
         this.Medallas =Medallas;
