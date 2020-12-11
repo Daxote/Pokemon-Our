@@ -84,6 +84,34 @@ public class Combate{
 		}
 		return out;
 	}
+	public int combatirJefe(Pokemon player2){
+		int out=0;
+		boolean sigue=true;
+		while(sigue){
+			ataque(player1,player2);
+			if(revisarTriunfo(player2)){
+				System.out.println("\n\n********************************************************\n\n");
+				System.out.println("Has derrotado a su Pokemon "+player2.getNombre());
+				System.out.println("\n\n********************************************************\n\n");
+				out = indexRival;
+				player1.restaurar();
+				player2.restaurar();
+				player1.ganarExp();
+				return 1;
+			}
+			ataqueCpu(player2,player1);
+			if(revisarTriunfo(player1)){
+				System.out.println("\n\n********************************************************\n\n");
+				System.out.println("Haz perdido la partida!!");
+				System.out.println("\n\n********************************************************\n\n");
+				out = -1;
+				player1.restaurar();
+				player2.restaurar();
+				return 0;
+			}
+		}
+		return out;
+	}
 
 	public boolean revisarTriunfo(Pokemon player){
 		if(player.getPs()<=0) return true;

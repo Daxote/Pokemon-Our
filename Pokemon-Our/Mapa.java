@@ -4,7 +4,7 @@ public class Mapa {
     private String [] Lugares = {"Ciudad Paleta","Ciudad Viridian","Ciudad Pewter","Ciudad Cerulean","Ciudad Safron"};;
     private String [][] Viajar = {{"Ciudad Viridian","no"},{"Ciudad Paleta","Ciudad Pewter"},{"Ciudad Viridian","Ciudad Cerulean"},
     {"Ciudad Pewter","Ciudad Safron"},{"Ciudad Cerulean","no"}};
-    private String [] Gimnacio = {"Gymnacio Roca","Gymnacio Hielo","Gymnacio Planta","Gymnacio Dragon","Gymnacio Siniestro"};;
+    private String [] Gimnacio = {"Gimnacio Roca","Gimnacio Hielo","Gimnacio Planta","Gimnacio Dragon","Gimnacio Siniestro"};;
 
     
     Mapa(){
@@ -33,8 +33,8 @@ public class Mapa {
     public void setGimnacio(String[] Gimnacio){
         this.Gimnacio = Gimnacio;
     }
-    public String[] getGimnacio(){
-        return Gimnacio;
+    public String getGimnacio(int Posicion){
+        return Gimnacio[Posicion];
     }
 
     public String[] viajar(int Posicion){

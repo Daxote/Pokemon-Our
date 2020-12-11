@@ -19,10 +19,10 @@ public class Mochila {
     public void setBayas(int Bayas){
         this.Bayas =Bayas;
     }
-    public void setPosiones(){
+    public void setPosiones(int pociones){
         this.Pociones =Pociones;
     }
-    public void setMedallas() {
+    public void setMedallas(int medallas) {
         this.Medallas =Medallas;
         
     }

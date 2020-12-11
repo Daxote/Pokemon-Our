@@ -11,6 +11,7 @@ public class Partida{
 	private Mapa mapa;
 	private String lugar;
 	private Mochila mochila;
+	private Pokemon jefe;
 
 
 	Partida(Pokedex pokedexGral){
@@ -83,7 +84,7 @@ public class Partida{
 				case 4: mochila();
 						break;
 				case 5: entrar_gimnacio();
-						System.out.println("\n\n********************************************************\n\n\n\n\n\n\n\n\n\n");
+						System.out.println("\n\n********************************************************\n\n");
 						break;
 				case 6: System.out.println("\n\n********************************************************\n\n");
 						System.out.println("El juego ha terminado,  gracias por jugar PokemonFLP!!!");
@@ -137,7 +138,6 @@ public class Partida{
 					case 2: System.out.println("Tiene "+mochila.getMedallas()+" Medallas\n");
 							break;
 					case 3: System.out.println("Ha salido de la mochila\n");
-							menu();
 				}
 			}while(op != 3);
 		}catch(IOException e){
@@ -328,6 +328,113 @@ public class Partida{
 	
 	}
 	private void entrar_gimnacio(){
-		mapa.getGimnacio();
+		System.out.println(mapa.getGimnacio(this.Posicion)+"\n");
+		int op = 0;
+		try{
+			do{
+				
+				System.out.println("1.- Retar al lider");
+				System.out.println("2.- Salir");
+				op = Integer.parseInt(buffer.readLine());
+
+				switch(op){
+					case 1: combateJefe();
+
+					case 2: System.out.println("   Ha Salido del Gimnacio   \n");
+				}
+			}while(op!=2);
+		}catch(IOException e){
+
+		}
+	}
+	private void combateJefe(){
+		this.W=0;
+		int n=SetupPokemon.cantidadPokemones;
+		Pokemon aux;
+		System.out.println("\n\n          Enfrentado al lider de Gimnasio  "+SetupPokemon.lideres[Posicion]+"  \n\n");
+		System.out.println("\n\n********************************************************\n\n");
+		System.out.println("Pokedex Personal");
+		System.out.println("======= ========\n");
+		for(int i=0;i<n;i++){
+			aux = jugador.getPokedex().getPokemon(i);
+			if(aux.getCapturado())
+				System.out.println((i+1)+".- "+aux.getNombre());
+		}
+		
+		int op=-1;
+		boolean flag=false;
+		try{
+			do{
+				if(flag) System.out.println("Ingrese una opción válida...\n");
+				System.out.println("Elije tu pokemon para la batalla....\n");
+				try{
+					op = Integer.parseInt(buffer.readLine());
+				}catch(NumberFormatException e){
+					System.out.println("\nPokedex Personal");
+					System.out.println("======= ========");
+					for(int i=0;i<n;i++){
+						aux = jugador.getPokedex().getPokemon(i);
+						if(aux.getCapturado()){
+							System.out.println("\n"+(i+1)+".- "+aux.getNombre());
+						}
+					}
+				}
+				flag=true;
+			}while((op<0)||(op>n));
+		}catch(IOException e){
+			System.out.println("Error de lectura desde el teclado...\n");
+		}
+		do{
+			System.out.println("\n\n********************************************************\n\n");
+			if(jugador.getPokedex().getPokemon(op-1).getCapturado()){
+				System.out.println("Su pokemon para el combate es "+ jugador.getPokedex().getPokemon(op-1).getNombre());
+				System.out.println("\n\n********************************************************\n\n");
+				combates[combateActual] = new Combate(jugador.getPokedex().getPokemon(op-1), pokedexGral);
+				jefe= new Pokemon(9+W, SetupPokemon.pokimones[Posicion][W], SetupPokemon.ataques[9+W]);
+				W+=combates[combateActual].combatirJefe(jefe);				
+				combateActual+=1;
+				if(W<2){
+					System.out.println("\n\n          Enfrentado al lide de Gimnasio "+SetupPokemon.lideres[Posicion]+"\n\n");
+					System.out.println("\n\n********************************************************\n\n");
+					System.out.println("Pokedex Personal");
+					System.out.println("======= ========\n");
+					for(int i=0;i<n;i++){
+						aux = jugador.getPokedex().getPokemon(i);
+						if(aux.getCapturado())
+							System.out.println((i+1)+".- "+aux.getNombre());
+					}
+					
+					op=-1;
+					flag=false;
+					try{
+						do{
+							if(flag) System.out.println("Ingrese una opción válida...\n");
+							System.out.println("Elije tu pokemon para la batalla....\n");
+							try{
+								op = Integer.parseInt(buffer.readLine());
+							}catch(NumberFormatException e){
+								System.out.println("\nPokedex Personal");
+								System.out.println("======= ========");
+								for(int i=0;i<n;i++){
+									aux = jugador.getPokedex().getPokemon(i);
+									if(aux.getCapturado()){
+										System.out.println("\n"+(i+1)+".- "+aux.getNombre());
+									}
+								}
+							}
+							flag=true;
+						}while((op<0)||(op>n));
+					}catch(IOException e){
+						System.out.println("Error de lectura desde el teclado...\n");
+					}
+				}
+				
+			}else{
+				System.out.println("\n               Opcion Invalida                 \n");
+			}
+		}while(W!=2);
+		System.out.println("Felicidades ha Derrotado al Lider de Gimnasio  "+SetupPokemon.lideres[Posicion]+" \n");
+		System.out.println("              Medalla del "+mapa.getGimnacio(Posicion)+" obtenida     \n");
+		mochila.setMedallas(mochila.getMedallas()+1);
 	}
 }
