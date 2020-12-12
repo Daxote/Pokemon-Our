@@ -19,10 +19,14 @@ public class SetupPokemon{
 												{"Rayo Confuso","Lanzallamas","Llamarada"},{"Golpe Cuerpo","Amnesia","Onda ígnea"}};
 	public static final String [] habilidades = {"Impactrueno","latigo","Gruñido"};
 	public static final Double [][] estadisticaAtaque ={{0.85,0.0},{0.7,0.0,},{0.5,0.0}};
-	public static final String [] lideres = {"Nico","Dante"};
-	public static final String [][] pokimones = {{"Graveler","Onix"},{"Magmar","Torkoal"}};
+	public static final String [] lideres = {"Nico","Dante","Rorro","Antonio","Erwin"};
+	public static final String [][] pokimones = {{"Graveler","Onix"},{"Magmar","Torkoal"},{"Sceptail","Venusaur"},{"Dragonite","Garchom"},{"Marowak","Gengar"}};
 	public static final String [][] ataqs = {{"Lanza Roca", "Terremoto", "Penkazo"},{"Caezazo","Fisura","Derribo"},
-											{"Rayo Confuso","Lanzallamas","Llamarada"},{"Golpe Cuerpo","Amnesia","Onda ígnea"}};
+											{"Rayo Confuso","Lanzallamas","Llamarada"},{"Golpe Cuerpo","Amnesia","Onda ígnea"},
+											{"Hoja aguda","Absorver","Portazo"},{"Latigo sepa","Planta feroz","Drenadoras"},
+											{"Cola Dragon","Cometa draco","Enfado"},{"Cola dragon","Llamarada","Terremoto"},
+											{"Huesomerang","Golpe cabeza","Cabeza palo"},{"Mal de ojo","Maldicion","Languetazo"}
+										};
 	public static final String [] derrotados ={"no"};
 
 	//public static final String [][] valores = {{10,0,0,5,0,2,0,0,2},{5,0,2,...},...} ?;
