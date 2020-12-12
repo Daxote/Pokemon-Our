@@ -390,11 +390,16 @@ public class Partida{
 				System.out.println("Su pokemon para el combate es "+ jugador.getPokedex().getPokemon(op-1).getNombre());
 				System.out.println("\n\n********************************************************\n\n");
 				combates[combateActual] = new Combate(jugador.getPokedex().getPokemon(op-1), pokedexGral);
-				jefe= new Pokemon(9+W, SetupPokemon.pokimones[Posicion][W], SetupPokemon.ataques[9+W]);
+				if (this.Posicion==0){
+					jefe= new Pokemon(9+W, SetupPokemon.pokimones[Posicion][W], SetupPokemon.ataqs[this.Posicion+W]);
+				}else{
+					jefe= new Pokemon(9+W, SetupPokemon.pokimones[Posicion][W], SetupPokemon.ataqs[this.Posicion+W+1]);
+				}
+
 				W+=combates[combateActual].combatirJefe(jefe);				
 				combateActual+=1;
 				if(W<2){
-					System.out.println("\n\n          Enfrentado al lide de Gimnasio "+SetupPokemon.lideres[Posicion]+"\n\n");
+					System.out.println("\n\n          Enfrentado al lider de Gimnasio "+SetupPokemon.lideres[Posicion]+"\n\n");
 					System.out.println("\n\n********************************************************\n\n");
 					System.out.println("Pokedex Personal");
 					System.out.println("======= ========\n");

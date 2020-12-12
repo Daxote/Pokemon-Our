@@ -4,7 +4,7 @@ public class Mapa {
     private String [] Lugares = {"Ciudad Paleta","Ciudad Viridian","Ciudad Pewter","Ciudad Cerulean","Ciudad Safron"};;
     private String [][] Viajar = {{"Ciudad Viridian","no"},{"Ciudad Paleta","Ciudad Pewter"},{"Ciudad Viridian","Ciudad Cerulean"},
     {"Ciudad Pewter","Ciudad Safron"},{"Ciudad Cerulean","no"}};
-    private String [] Gimnacio = {"Gimnacio Roca","Gimnacio Hielo","Gimnacio Planta","Gimnacio Dragon","Gimnacio Siniestro"};;
+    private String [] Gimnacio = {"Gimnacio Roca","Gimnacio Fuego","Gimnacio Planta","Gimnacio Dragon","Gimnacio Siniestro"};;
 
     
     Mapa(){
